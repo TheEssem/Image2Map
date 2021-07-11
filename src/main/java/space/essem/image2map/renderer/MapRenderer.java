@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import net.minecraft.block.MapColor;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FilledMapItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -32,8 +31,7 @@ public class MapRenderer {
         return new double[] { color[0] * coeff, color[1] * coeff, color[2] * coeff };
     }
 
-    public static ItemStack render(BufferedImage image, DitherMode mode, ServerWorld world, double x, double z,
-            PlayerEntity player) {
+    public static ItemStack render(BufferedImage image, DitherMode mode, ServerWorld world, double x, double z) {
         // mojang removed the ability to set a map as locked via the "locked" field in
         // 1.17, so we create and apply our own MapState instead
         ItemStack stack = new ItemStack(Items.FILLED_MAP);
@@ -186,7 +184,7 @@ public class MapRenderer {
         return result;
     }
 
-    private static BufferedImage convertToBufferedImage(Image image) {
+    public static BufferedImage convertToBufferedImage(Image image) {
         BufferedImage newImage = new BufferedImage(image.getWidth(null), image.getHeight(null),
                 BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g = newImage.createGraphics();
